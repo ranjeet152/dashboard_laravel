@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d50000;
+      }
+      .cls-2 {
+        fill: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+      }
+      .cls-3 {
+        fill: #0099ff;
+      }
+    </style>
+  </defs>
+  
+  <!-- Red Background for Admin Label -->
+  <rect class="cls-1" x="10" y="10" width="180" height="60" rx="10" ry="10"/>
+  
+  <!-- Admin Text -->
+  <text class="cls-2" x="30" y="50">Admin</text>
+  
+  <!-- Circle with i inside -->
+  <circle class="cls-3" cx="220" cy="40" r="25"/>
+  <text class="cls-2" x="212" y="50" font-size="40">i</text>
+  
+  <!-- Dark text for "Control Panel" -->
+  <text class="cls-2" x="270" y="50" fill="#000000" font-size="48">Control Panel</text>
+</svg>
