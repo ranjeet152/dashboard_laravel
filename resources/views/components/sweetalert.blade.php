@@ -1,6 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
+@section('main-simple-page')
 
 <div class="container">
           <div class="page-inner">
@@ -8,7 +8,7 @@
               <h3 class="fw-bold mb-3">Alert</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="{{ route('dashboard') }}">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -16,13 +16,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Base</a>
+                  <a href="{{ route('components.sweetalert') }}">Base</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Sweet Alert</a>
+                  <a href="{{ route('components.sweetalert') }}">Sweet Alert</a>
                 </li>
               </ul>
             </div>
@@ -33,7 +33,7 @@
                     <div class="card-title">Sweet Alert</div>
                     <div class="card-category">
                       <a 
-                        href="https://lipis.github.io/bootstrap-sweetalert" 
+                        href="https://lipis.github.io/bootstrap-sweetalert/" 
                         target="_blank" 
                         rel="noopener noreferrer"
                       >

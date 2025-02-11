@@ -9,6 +9,7 @@
     /> 
     <!-- Fonts and icons -->
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <script>
       WebFont.load({
         google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -26,6 +27,39 @@
         },
       });
     </script>
+    <style>
+      /* Dropdown Menu */
+      .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 50px;
+        background: white;
+        width: 270px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+      }
+
+      .dropdown-menu #ab {
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .dropdown-menu #ab:hover {
+        background: #3498db;
+        color: white;
+      }
+
+      /* Show Dropdown */
+      .show {
+        display: flex;
+      }
+    </style>
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}" />
@@ -161,7 +195,7 @@
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="sidebar-style-2.html">
+                      <a href="{{ route('sidebar_layouts.sidebar_styles') }}">
                         <span class="sub-item">Sidebar Style 2</span>
                       </a>
                     </li>
@@ -613,15 +647,15 @@
                     <div class="quick-actions-scroll scrollbar-outer">
                       <div class="quick-actions-items">
                         <div class="row m-0">
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
+                          <a class="col-6 col-md-4 p-0" href="{{ route('Quick_Actions.calender') }}">
+                            <div class="quick-actions-item"> 
                               <div class="avatar-item bg-danger rounded-circle">
                                 <i class="far fa-calendar-alt"></i>
                               </div>
                               <span class="text">Calendar</span>
                             </div>
                           </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
+                          <a class="col-6 col-md-4 p-0" href="{{ route('Quick_Actions.maps') }}">
                             <div class="quick-actions-item">
                               <div
                                 class="avatar-item bg-warning rounded-circle"
@@ -631,7 +665,7 @@
                               <span class="text">Maps</span>
                             </div>
                           </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
+                          <a class="col-6 col-md-4 p-0" href="{{ route('Quick_Actions.report') }}">
                             <div class="quick-actions-item">
                               <div class="avatar-item bg-info rounded-circle">
                                 <i class="fas fa-file-excel"></i>
@@ -639,7 +673,7 @@
                               <span class="text">Reports</span>
                             </div>
                           </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
+                          <a class="col-6 col-md-4 p-0" href="{{ route('Quick_Actions.email') }}">
                             <div class="quick-actions-item">
                               <div
                                 class="avatar-item bg-success rounded-circle"
@@ -649,7 +683,7 @@
                               <span class="text">Emails</span>
                             </div>
                           </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
+                          <a class="col-6 col-md-4 p-0" href="{{ route('Quick_Actions.invoice') }}">
                             <div class="quick-actions-item">
                               <div
                                 class="avatar-item bg-primary rounded-circle"
@@ -684,9 +718,9 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="{{ asset('assets/img/profile.png') }}"
-                        alt="..."
-                        class="avatar-img rounded-circle"
+                        src="{{ ('/storage/'.$user->image)}}"
+                        alt="image profile"
+                        class="avatar-img rounded"
                       />
                     </div>
                     <span class="profile-username">
@@ -699,46 +733,47 @@
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
-                            <img
-                              src="{{ asset('assets/img/por.jpg') }}"
+                          <img
+                              src="{{ ('/storage/'.$user->image)}}"
                               alt="image profile"
                               class="avatar-img rounded"
                             />
                           </div>
-                          <div class="u-text">
-                            <h4>Ranjeet Yaduvanshi</h4>
-                            <p class="text-muted">ry0099610@gmail.com</p>
-                            <a
-                              href="profile.html"
-                              class="btn btn-xs btn-secondary btn-sm"
-                              >View Profile</a
-                            >
+                          <div class="u-text"> 
+                            <h4>{{ $user->username }}</h4>  
+                            <p>{{ $user->email }}</p>  
                           </div>
                         </div>
                       </li>
                       <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">My Projects Works</a>
-                        <a class="dropdown-item" href="#">Inbox</a>
+                        
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Account Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <!-- <a class="dropdown-item" href="#">Logout</a> -->
-                        <!-- dashboard.blade.php -->
-                         <h1>Welcome, {{ $user->username }}</h1>  
+                        <div class="dropdown-divider"></div> 
+                        <a id="ab" href="{{ route('profile.view_profile') }}"
+                          ><i class="fas fa-user"></i>View Profile</a
+                        >
+                        <a id="ab" href="#"
+                          ><i class="fa-solid fa-address-book"></i>Inbox</a
+                        >
+                        <a id="ab" href="Setting.html"
+                          ><i class="fas fa-cog"></i> Settings</a
+                        > 
 
                         <!-- Logout -->
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                         
+											<div class="dropdown-divider"></div>   
+                        <a  id="ab" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
                             @csrf
                         </form>
 
-                        <!-- Delete User -->
+                        <!-- Delete User --> 
+                        <div class="dropdown-divider"></div>
                         <form action="{{ route('delete-user', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Delete User</button>
+                            <button type="submit" style="padding: 10px; margin: 20px;">Delete User</button>
                         </form>
 
 
@@ -751,10 +786,12 @@
           </nav>
           <!-- End Navbar -->
         </div>
-        <!-- @section('main-jsvectoemap-page')
-        @show() -->
+			
+           
         @section('main-dashboard-page')
         @show()
+ 
+			
         <footer class="footer">
           <div class="container-fluid d-flex justify-content-between">
             <nav class="pull-left">
@@ -778,14 +815,14 @@
             </div>
             <div>
               Distributed by
-              <a target="_blank" href="#">Ranjeet<i class="fa fa-heart heart text-danger"></i>Raj Yaduvanshi</a>.
+              <a target="_blank" href="#">Raj<i class="fa fa-heart heart text-danger"></i>Yaduvanshi</a>.
             </div>
           </div>
         </footer>
-      </div>
-
-      <!-- Custom template | don't include it in your project! -->
-      <div class="custom-template">
+		</div>
+		
+		<!-- Custom template | don't include it in your project! -->
+		<div class="custom-template">
         <div class="title">Settings</div>
         <div class="custom-content">
           <div class="switcher">
@@ -977,45 +1014,48 @@
           <i class="icon-settings"></i>
         </div>
       </div>
-      <!-- End Custom template -->
-    </div>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+		<!-- End Custom template -->
+	</div>
+	<!--   Core JS Files   -->
+	<script src="{{ asset('../assets/js/core/jquery-3.7.1.min.js') }}"></script>
+	<script src="{{ asset('../assets/js/core/popper.min.js') }}"></script>
+	<script src="{{ asset('../assets/js/core/bootstrap.min.js') }}"></script>
+	
+	<!-- jQuery Scrollbar -->
+	<script src="{{ asset('../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+	<!-- Moment JS -->
+	<!-- <script src="../assets/js/plugin/moment/moment.min.js"></script> -->
 
-    <!-- jQuery Scrollbar -->
-    <script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+	<!-- Chart JS -->
+	<script src="{{ asset('../assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
-    <!-- Chart JS -->
-    <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
+	<!-- jQuery Sparkline -->
+	<script src="{{ asset('../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-    <!-- jQuery Sparkline -->
-    <script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+	<!-- Chart Circle -->
+	<script src="{{ asset('../assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
-    <!-- Chart Circle -->
-    <script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+	<!-- Datatables -->
+	<script src="{{ asset('../assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
-    <!-- Datatables -->
-    <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+	<!-- Bootstrap Notify -->
+	<script src="{{ asset('../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-    <!-- Bootstrap Notify -->
-    <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+	<!-- jQuery Vector Maps -->
+	<script src="{{ asset('../assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+	<script src="{{ asset('../assets/js/plugin/jsvectormap/world.js') }}"></script>
 
-    <!-- jQuery Vector Maps -->
-    <script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
+	<!-- Sweet Alert -->
+	<script src="{{ asset('../assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-    <!-- Sweet Alert -->
-    <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+	<!-- Kaiadmin JS -->
+	<script src="{{ asset('../assets/js/kaiadmin.min.js') }}"></script>
 
-    <!-- Kaiadmin JS -->
-    <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+	<!-- Kaiadmin DEMO methods, don't include it in your project! -->
+	<script src="{{ asset('../assets/js/setting-demo2.js') }}"></script>
+    <script src="{{ asset('../assets/js/demo.js') }}"></script>
+    <!-- <script src="{{ asset('../assets/js/setting-demo2.js') }}"></script> -->
 
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
-    <script src="{{ asset('assets/js/demo.js') }}"></script>
-    <script src="../assets/js/setting-demo2.js"></script>
 
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
@@ -1046,9 +1086,8 @@
       });
     </script>
 
-
-<!-- ==== font-awesome-icone ==== -->
-<script>
+		<!-- ==== font-awesome-icone ==== -->
+    <script>
       var iconClass = [
         "fas fa-address-book",
         "fas fa-address-card",
@@ -2358,7 +2397,6 @@
       }
 </script>
 
-
 <!-- ========= Datatables Form JS ========= -->
 <script>
       $(document).ready(function () {
@@ -2418,6 +2456,5 @@
       });
 </script>
 
-    
-  </body>
+</body>
 </html>

@@ -1,6 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
+@section('main-simple-page')
 
 <div class="container">
           <div class="page-inner">
@@ -8,7 +8,7 @@
               <h3 class="fw-bold mb-3">Forms</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="{{ route('dashboard') }}">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -16,13 +16,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Forms</a>
+                  <a href="{{ route('forms.form') }}">Forms</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Basic Form</a>
+                  <a href="{{ route('forms.form') }}">Basic Form</a>
                 </li>
               </ul>
             </div>
@@ -193,11 +193,16 @@
                             <option>Unnao</option>
                             <option>Varanasi</option>
                           </select>
-                        </div>
+                        </div> 
                         <div class="form-group">
                           <label for="comment">Comment</label>
-                          <textarea class="form-control" id="comment" name="comment" rows="5">
-                          </textarea>
+                          <textarea
+                            name="comment"
+                            class="form-control"
+                            placeholder="Enter your comment"
+                            rows="6"
+                            required
+                          ></textarea>
                         </div>
                       </div>
                       <div class="col-md-6 col-lg-4">
@@ -288,7 +293,7 @@
             />
             <figure class="imagecheck-figure">
               <img
-                src="../assets/img/examples/product1.jpg"
+                src="{{ asset('../assets/img/examples/product1.jpg') }}"
                 alt="title"
                 class="imagecheck-image"
               />
@@ -306,7 +311,7 @@
             />
             <figure class="imagecheck-figure">
               <img
-                src="../assets/img/examples/product4.jpg"
+                src="{{ asset('../assets/img/examples/product4.jpg') }}"
                 alt="title"
                 class="imagecheck-image"
               />
@@ -323,7 +328,7 @@
             />
             <figure class="imagecheck-figure">
               <img
-                src="../assets/img/examples/product3.jpg"
+                src="{{ asset('../assets/img/examples/product3.jpg') }}"
                 alt="title"
                 class="imagecheck-image"
               />

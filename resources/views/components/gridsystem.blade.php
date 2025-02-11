@@ -1,6 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
+@section('main-simple-page')
 
 
 <div class="container">
@@ -9,7 +9,7 @@
               <h3 class="fw-bold mb-3">Grid System</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="{{ route('dashboard') }}">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -17,13 +17,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Base</a>
+                  <a href="{{ route('components.gridsystem') }}">Base</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Grid System</a>
+                  <a href="{{ route('components.gridsystem') }}">Grid System</a>
                 </li>
               </ul>
             </div>

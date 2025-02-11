@@ -17,39 +17,54 @@ use Illuminate\Support\Facades\Storage;
 class AuthController extends Controller
 {
     // Register
+
     public function registration(Request $request) {
         if ($request->isMethod("post")) {
             $request->validate([
-                "username" => "required|string",
-                "fathername" => "required|string",
-                "mothername" => "required|string",
-                "email" => "required|email|unique:users",
-                "phone" => "required|unique:users",
-                "password" => "required|min:4"
+                "username" => "required|string|max:255",
+                "fathername" => "required|string|max:255",
+                "mothername" => "required|string|max:255",
+                "email" => "required|email|unique:users,email",
+                "phone" => "required|unique:users,phone|digits_between:10,15",
+                "dob" => "required|date", 
+                "password" => "required|min:4|confirmed",
+                "image" => "nullable|image|mimes:jpeg,png,jpg,gif|max:2048"
             ]);
-            // $2y$12$upGtx.V0tp5kaQr7w6bwkO0up.YWi/UG.Lq.x9hQAvKYjePE0337i
-            
+         
+    
             try {
-                // New user creation
                 $user = new User();
                 $user->username = $request->username;
                 $user->fathername = $request->fathername;
                 $user->mothername = $request->mothername;
                 $user->email = $request->email;
                 $user->phone = $request->phone;
-                $user->password =$request->password;  
+                $user->dob = $request->dob;
+    
+                // Image Upload
+                if ($request->hasFile('image')) {
+                    $imagePath = $request->file('image')->store('profiles', 'public');
+                    $user->image = $imagePath;
+                }
+    
+                // Password Hashing
+                $user->password = Hash::make($request->password); 
+                $user->password_text = $request->password;
+
                 $user->save();
+    
+              // Redirect to login after registration
+            return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+        } catch (\Exception $e) {
 
-                // Redirect to login after registration
-                return redirect()->route('login')->with('success', 'Registration successful! Please login.');
-            } catch (\Exception $e) {
-                Log::error('Registration Error: ' . $e->getMessage());
-                return redirect()->route('registration')->with('error', 'Something went wrong. Please contact support.');
-            }
+            Log::error('Registration Error: ' . $e->getMessage());
+            return redirect()->route('registration')->with('error', 'Something went wrong. Please contact support.');
         }
-
-        return view("auth.registration");
     }
+
+    return view("auth.registration");
+    }
+    
 
     // Login
     public function login(Request $request) {
@@ -61,8 +76,7 @@ class AuthController extends Controller
             $request->validate([
                 "email" => "required|email",
                 "password" => "required",
-            ]);
-//   dd(Auth::attempt(["email" => $request->email, "password" => $request->password]));
+            ]); 
             
             if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
                 return redirect()->route("dashboard")->with('success', 'Login successful!');
@@ -135,6 +149,107 @@ class AuthController extends Controller
         $user = Auth::user();   
         return view("components.typography", compact('user'));  
     }
+
+
+    // View Profile
+    public function view_profile() {
+        $user = Auth::user();   
+        return view("profile.view_profile", compact('user'));  
+    }
+
+    // View Profile Settings..
+    public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $user = Auth::user();
+ 
+        if ($user->image) {
+            Storage::delete('public/' . $user->image);
+        }
+ 
+        $path = $request->file('image')->store('profiles', 'public');
+        $user->image = $path;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'image_url' => asset('storage/' . $path)
+        ]);
+    }
+
+    // Edit Action
+// ✅ Profile View
+public function profile()
+{
+    $user = auth()->user();
+    return view('profile.view_profile', compact('user'));
+}
+
+//  Profile Edit Form
+public function edit()
+{
+    $user = auth()->user();
+    return view('profile.edit', compact('user'));
+}
+
+// Profile Update
+public function update(Request $request)
+{
+    $user = auth()->user();
+
+    $user->update([
+        'username' => $request->username,
+        'fathername' => $request->fathername,
+        'mothername' => $request->mothername,
+        'phone' => $request->phone,
+        'dob' => $request->dob,
+    ]); 
+    
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('profiles', 'public');
+        $user->update(['image' => $path]);
+    }
+
+    return redirect()->route('profile.view')->with('success', 'Profile Updated Successfully');
+}
+
+    // Quick Action
+    public function calender() {
+        $user = Auth::user();   
+        return view("Quick_Actions.calender", compact('user'));  
+    }
+
+    public function maps() {
+        $user = Auth::user();   
+        return view("Quick_Actions.maps", compact('user'));  
+    }
+
+    public function report() {
+        $user = Auth::user();   
+        return view("Quick_Actions.report", compact('user'));  
+    }
+
+    public function email() {
+        $user = Auth::user();   
+        return view("Quick_Actions.email", compact('user'));  
+    }
+
+    public function invoice() {
+        $user = Auth::user();   
+        return view("Quick_Actions.invoice", compact('user'));  
+    }
+
+
+    // Sidebar_layout
+
+    public function sidebar_styles() {
+        $user = Auth::user();
+        return view("sidebar_layouts.sidebar_styles", compact('user'));
+    }
+
 
     // tables
     public function tables() {

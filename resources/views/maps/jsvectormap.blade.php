@@ -1,6 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
+@section('main-simple-page')
 
 <script>
     let isGoogleMapVisible = false;  
@@ -50,7 +50,7 @@
                     <h4 class="card-title text-center">Vector Maps</h4>
                     <p class="card-category text-center">
                         We use the 
-                        <a href="#" onclick="toggleMap(event)" id="mapLink">
+                        <a href="{{ route('Quick_Actions.maps')}}" onclick="toggleMap(event)" id="mapLink">
                             Jsvectormap
                         </a>
                         plugin to create vector maps.

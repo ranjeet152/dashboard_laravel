@@ -1,7 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
-
+@section('main-simple-page')
 
 <div class="container">
           <div class="page-inner">
@@ -9,7 +8,7 @@
               <h3 class="fw-bold mb-3">Notifications</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="{{ route('dashboard') }}">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -17,13 +16,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Base</a>
+                  <a href="{{ ('components.notifications') }}">Base</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Notifications</a>
+                  <a href="{{ ('components.notifications') }}">Notifications</a>
                 </li>
               </ul>
             </div>
@@ -37,11 +36,11 @@
                       notifications from
                         <a 
                           class="link" 
-                          href="https://freefrontend.com/bootstrap-notifications" 
+                          href="https://cdnjs.com/libraries/bootstrap-notify" 
                           target="_blank" 
                           rel="noopener noreferrer"
                         >
-                          Bootstrap Notify
+                          Bootstrap Notify cdnjs
                         </a>
                     </div>
                   </div>

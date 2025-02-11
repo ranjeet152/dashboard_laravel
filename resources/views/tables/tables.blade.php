@@ -1,6 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
+@section('main-simple-page')
 
 
 <div class="container">
@@ -9,7 +9,7 @@
               <h3 class="fw-bold mb-3">Tables</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="{{ route('dashboard') }}">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -17,13 +17,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Tables</a>
+                  <a href="{{ route('tables.tables') }}">Tables</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Basic Tables</a>
+                  <a href="{{ route('tables.tables') }}">Basic Tables</a>
                 </li>
               </ul>
             </div>
@@ -42,8 +42,7 @@
                         <tr>
                           <th scope="col">Id</th>
                           <th scope="col">Name</th> 
-                          <th scope="col">Email</th>
-                          <th scope="col">Fathername</th>
+                          <th scope="col">Email</th> 
                         </tr>
                       </thead>
                       <tbody> 
@@ -51,8 +50,7 @@
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->fathername }}</td>
+                                <td>{{ $user->email }}</td> 
                             </tr>
                          @endforeach 
  
@@ -186,24 +184,34 @@
                         <thead>
                           <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Name</th> 
-                            <th scope="col">Email</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Name</th>  
                             <th scope="col">Fathername</th>
                             <th scope="col">mothername</th>
                             <th scope="col">phone</th>
-                            <th scope="col">Created_at</th>                          
+                            <th scope="col">Email</th>
+                            <th scope="col">DOB</th> 
+                            <th scope="col">Created_at</th> 
+                            <th scope="col">Updated_at</th>                         
                            </tr>
                         </thead>
                         <tbody> 
                           @foreach($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td> <img
+                                  src="{{ ('/storage/'.$user->image)}}"
+                                  alt="image profile"
+                                  class="avatar-img rounded"/>
+                                </td>
+                                <td>{{ $user->username }}</td> 
                                 <td>{{ $user->fathername }}</td>
                                 <td>{{ $user->mothername }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->dob }}</td> 
                                 <td>{{ $user->created_at }}</td> 
+                                <td>{{ $user->updated_at }}</td> 
                             </tr>
                          @endforeach  
                         </tbody>
@@ -221,15 +229,15 @@
                     <table class="table table-hover">
                       <thead>
                         <tr> 
-                          <th scope="col">mothername</th>
+                          <th scope="col">fathername</th>
                           <th scope="col">phone</th>
                           <th scope="col">Created_at</th>
                         </tr>
                       </thead>
                       <tbody> 
                         @foreach($users as $user)
-                            <tr>
-                                <td>{{ $user->mothername }}</td>
+                            <tr> 
+                                <td>{{ $user->fathername }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>{{ $user->created_at }}</td> 
                             </tr>
@@ -355,8 +363,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Name</th> 
-                            <th scope="col">Email</th>
-                            <th scope="col">Fathername</th>  
+                            <th scope="col">Email</th>  
                         </tr>
                       </thead>
                       <tbody> 
@@ -364,24 +371,23 @@
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->fathername }}</td>  
+                                <td>{{ $user->email }}</td>  
                             </tr>
                          @endforeach 
                       </tbody>
                     </table>
                     <table class="table table-head-bg-primary mt-4">
                       <thead>
-                        <tr> 
-                          <th scope="col">Mothername</th>
+                        <tr>  
+                          <th scope="col">Fathername</th> 
                           <th scope="col">Phone</th>
                           <th scope="col">Created_at</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($users as $user)
-                            <tr>
-                                <td>{{ $user->mothername }}</td>
+                            <tr> 
+                                <td>{{ $user->fathername }}</td> 
                                 <td>{{ $user->phone }}</td>
                                 <td>{{ $user->created_at }}</td>  
                             </tr>
@@ -396,3 +402,4 @@
 </div>
 
 @endsection
+

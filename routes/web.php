@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController; 
+
 
 // Home Page
 Route::get('/', function () {
@@ -33,8 +34,41 @@ Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard'
     Route::get('/typography', [AuthController::class, 'typography'])->name('components.typography');
 }); 
 
+// Quick Action
+Route::prefix('Quick_Actions')->group(function () {
+    Route::get('/calender', [AuthController::class, 'calender'])->name('Quick_Actions.calender');
+    Route::get('/maps', [AuthController::class, 'maps'])->name('Quick_Actions.maps');
+    Route::get('/report', [AuthController::class, 'report'])->name('Quick_Actions.report');
+    Route::get('/email', [AuthController::class, 'email'])->name('Quick_Actions.email');
+    Route::get('/invoice', [AuthController::class, 'invoice'])->name('Quick_Actions.invoice');
+});
+
+
+// profile
+Route::prefix('profile')->group(function () {
+    Route::get('/view_profile', [AuthController::class, 'view_profile'])->name('profile.view_profile'); 
+}); 
+// ============== 
+
+  // Profile Routes
+  Route::controller(AuthController::class)->group(function () {
+    Route::get('/profile', 'profile')->name('profile.view');
+    Route::get('/profile/edit', 'edit')->name('profile.edit');
+    Route::post('/profile/update', 'update')->name('profile.update');
+});
+
+// =============
+
+
+Route::post('/profile/update-image', [AuthController::class, 'updateImage'])->name('profile.updateImage');
+
 // form..
 Route::get('/forms/form', [AuthController::class, 'form'])->name('forms.form')->middleware('auth'); 
+
+// Sidebar styles ..
+Route::prefix('sidebar_layouts')->group(function () {
+    Route::get('/sidebar_layouts/sidebar_styles', [AuthController::class, 'sidebar_styles'])->name('sidebar_layouts.sidebar_styles');  
+}); 
 
 // tables..
 Route::prefix('tables')->group(function () {
@@ -58,3 +92,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Delete User (only for logged-in users, handled in controller)
 Route::delete('/delete-user/{id}', [AuthController::class, 'deleteUser'])->name('delete-user');
+
+
+ 

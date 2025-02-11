@@ -1,6 +1,6 @@
-@extends('layout.dashboard-hero')
+@extends('layout.simple-hero')
 
-@section('main-dashboard-page')
+@section('main-simple-page')
 
 <div class="container">
 				<div class="page-inner">
@@ -8,7 +8,7 @@
 						<h3 class="fw-bold mb-3">Avatars</h3>
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home">
-								<a href="#">
+								<a href="{{ route('dashboard') }}">
 									<i class="icon-home"></i>
 								</a>
 							</li>
@@ -16,13 +16,13 @@
 								<i class="icon-arrow-right"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Base</a>
+								<a href="{{ route('components.avatarc') }}">Base</a>
 							</li>
 							<li class="separator">
 								<i class="icon-arrow-right"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Avatars</a>
+								<a href="{{ route('components.avatarc') }}">Avatars</a>
 							</li>
 						</ul>
 					</div>
@@ -154,3 +154,5 @@
 </div>
 
 @endsection
+
+ 

@@ -9,7 +9,7 @@
               <h3 class="fw-bold mb-3">Icons</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="{{ route('dashboard') }}">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -17,13 +17,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Base</a>
+                  <a href="{{ route('components.simple-line-icon') }}">Base</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Line Awesome</a>
+                  <a href="{{ route('components.simple-line-icon') }}">Line Awesome</a>
                 </li>
               </ul>
             </div>
@@ -40,7 +40,7 @@
                         target="_blank" 
                         rel="noopener noreferrer"
                       >
-                        Simple Line Icons
+                        Simple Line Icons cdn
                       </a>
                     </div>
                   </div>

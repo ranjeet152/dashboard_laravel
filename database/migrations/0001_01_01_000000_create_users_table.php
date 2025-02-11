@@ -15,15 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('username');  
             $table->string('fathername')->nullable();   
-            $table->string('mothername')->nullable();  
-            $table->string('email')->unique();
+            $table->string('mothername')->nullable(); 
+            $table->string('phone')->unique(); 
+            $table->string('email')->unique();  
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->unique();  
+            $table->date('dob');
+            $table->string('image')->nullable(); 
             $table->string('password');
+            $table->string('password_text')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-
+ 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
@@ -33,7 +36,7 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade'); // Foreign key जोड़ी
-            $table->string('ip_address', 20)->nullable(); // साइज़ छोटा किया
+            $table->string('ip_address', 20)->nullable();  
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
