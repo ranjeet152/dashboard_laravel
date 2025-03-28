@@ -1,31 +1,44 @@
+# Use official PHP + Apache image
 FROM php:8.2-apache
 
-RUN apt-get update && apt-get-install -y\
+# Install required extensions & dependencies
+RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     git \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    liboing-dev \
+    libonig-dev \
     && docker-php-ext-install pdo pdo_mysql mbstring gd
 
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Enable Apache mod_rewrite for Laravel
 RUN a2enmod rewrite
 
+# Set working directory
 WORKDIR /var/www/html
 
+# Copy Laravel files
 COPY . .
-RUN composer install --optimize-autoloader --no-dev
 
-RUN composer dump-autoload 
+# Install Laravel dependencies (Only once, no repetition in entrypoint)
+RUN composer install --optimize-autoloader --no-dev 
 
+RUN composer dump-autoload
+
+# Set proper permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Copy entrypoint script and give it execute permission
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Expose HTTP port
 EXPOSE 80
+
+# Run the entrypoint script
 CMD ["/entrypoint.sh"]
