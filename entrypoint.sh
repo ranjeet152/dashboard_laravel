@@ -14,7 +14,7 @@ fi
 
 # Run Migrations & Seeding (Only in local/dev)
 if [ "$APP_ENV" != "production" ]; then
-    php artisan migrate:fresh --force
+    php artisan migrate:fresh  --force
 else
     php artisan migrate --force
 fi
