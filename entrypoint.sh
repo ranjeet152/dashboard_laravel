@@ -1,23 +1,27 @@
+#!/bin/sh
+
+# Clear Cache
 php artisan optimize:clear
 php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-if [! -L "public/storage"]; then
+# Ensure Storage Link Exists   asset
+if [ ! -L "public/storage" ]; then
     php artisan storage:link
 fi
 
-if ["$APP_ENV" != "production"]; then 
-    php artisan migrate:fresh --seed --force
-else 
+# Run Migrations & Seeding (Only in local/dev)
+if [ "$APP_ENV" != "production" ]; then
+    php artisan migrate:fresh --force
+else
     php artisan migrate --force
 fi
 
+# Cache Config & Routes for Performance
 php artisan config:cache
 php artisan route:cache
 
-
+# Start Apache Server
 apache2-foreground
-
-
