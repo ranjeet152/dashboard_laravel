@@ -2,6 +2,42 @@
 
 @section("main-page")  
 
+<!-- Font Awesome CDN (Corrected) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+<style>
+  .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 7px;
+            padding-right: 50px; /* Space for icon */
+            border: .5px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 15px;
+            color: gray;
+        }
+
+        .toggle-password:hover {
+            color: black;
+        }
+</style>
+
+
+
 <div class="container" id="container-form">
     <!-- Title section -->
     <div class="title">Registration</div>
@@ -47,8 +83,11 @@
                     <input type="date" name="dob" value="{{ old('dob') }}" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Password</span>
-                    <input type="password" name="password" placeholder="Enter your password" required>
+                  <span class="details">Password</span>
+                  <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+                    <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+                  </div> 
                 </div> 
                 <div class="input-box">
                     <span class="details">Confirm Password</span>
@@ -63,10 +102,29 @@
             <div class="button">
                 <input type="submit" value="Register">
             </div>
-            <p id="p1">Already have an account? <a href="{{ route('login') }}">Login</a></p>
+            <p id="p1">Already have an account? <a id="p2" href="{{ route('login') }}">Login</a></p>
         </form>
     </div>
 </div> 
+
+<script>
+        const passwordField = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        console.log(passwordField,togglePassword);
+
+        togglePassword.addEventListener("click", function (e) {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");  
+            } else {
+                passwordField.type = "password";
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");  
+            }
+        });
+</script>
+
 
 
 <style>
@@ -86,6 +144,12 @@
   font-size: 25px;
   font-weight: 500;
   position: relative;
+}
+#p1 {
+  font-size: 1.5rem;
+}
+#p2 {
+  font-size: 2rem;
 }
 #container-form .title::before {
   content: "";

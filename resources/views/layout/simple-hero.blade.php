@@ -8,7 +8,7 @@
       name="viewport"
     /> 
     <!-- Fonts and icons -->
-    <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
     <script>
@@ -108,7 +108,7 @@
               <li class="nav-item active">
                 <a
                   data-bs-toggle="collapse"
-                  href="#dashboard"
+                  href="{{ route('dashboard') }}"
                   class="collapsed"
                   aria-expanded="false"
                 >
@@ -119,7 +119,7 @@
                 <div class="collapse" id="dashboard">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="../demo1/index.html">
+                      <a href="../demo1.html">
                         <span class="sub-item">Dashboard 1</span>
                       </a>
                     </li>
@@ -133,7 +133,7 @@
                 <h4 class="text-section">Components</h4>
               </li>
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#base">
+                <a data-bs-toggle="collapse" href="{{ route('components.avatarc') }}">
                   <i class="fas fa-layer-group"></i>
                   <p>Base</p>
                   <span class="caret"></span>
@@ -189,7 +189,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                <a data-bs-toggle="collapse" href="{{ route('sidebar.sidebar') }}">
                   <i class="fas fa-th-list"></i>
                   <p>Sidebar Layouts</p>
                   <span class="caret"></span>
@@ -197,7 +197,7 @@
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="{{ route('sidebar_layouts.sidebar_styles') }}">
+                      <a href="{{ route('sidebar.sidebar') }}">
                         <span class="sub-item">Sidebar Style 2</span>
                       </a>
                     </li>
@@ -210,7 +210,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#forms">
+                <a data-bs-toggle="collapse" href="{{ route('forms.form') }}">
                   <i class="fas fa-pen-square"></i>
                   <p>Forms</p>
                   <span class="caret"></span>
@@ -226,7 +226,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#tables">
+                <a data-bs-toggle="collapse" href="{{ route('tables.tables') }}">
                   <i class="fas fa-table"></i>
                   <p>Tables</p>
                   <span class="caret"></span>
@@ -247,7 +247,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#maps">
+                <a data-bs-toggle="collapse" href="{{ route('maps.googlemap') }}">
                   <i class="fas fa-map-marker-alt"></i>
                   <p>Maps</p>
                   <span class="caret"></span>
@@ -580,7 +580,7 @@
                             </div>
                             <div class="notif-content">
                               <span class="block">
-                                Rahmad commented on Admin
+                                Raj commented on Admin
                               </span>
                               <span class="time">12 minutes ago</span>
                             </div>
@@ -820,7 +820,7 @@
             </div>
           </div>
         </footer>
-		</div>
+		  </div>
 		
 		<!-- Custom template | don't include it in your project! -->
 		<div class="custom-template">
@@ -1018,44 +1018,44 @@
 		<!-- End Custom template -->
 	</div>
 	<!--   Core JS Files   -->
-	<script src="{{ asset('../assets/js/core/jquery-3.7.1.min.js') }}"></script>
-	<script src="{{ asset('../assets/js/core/popper.min.js') }}"></script>
-	<script src="{{ asset('../assets/js/core/bootstrap.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/core/jquery-3.7.1.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/core/popper.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/core/bootstrap.min.js') }}"></script>
 	
 	<!-- jQuery Scrollbar -->
-	<script src="{{ asset('../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 	<!-- Moment JS -->
 	<!-- <script src="../assets/js/plugin/moment/moment.min.js"></script> -->
 
 	<!-- Chart JS -->
-	<script src="{{ asset('../assets/js/plugin/chart.js/chart.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
 	<!-- jQuery Sparkline -->
-	<script src="{{ asset('../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
 	<!-- Chart Circle -->
-	<script src="{{ asset('../assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
 	<!-- Datatables -->
-	<script src="{{ asset('../assets/js/plugin/datatables/datatables.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
 	<!-- Bootstrap Notify -->
-	<script src="{{ asset('../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
 	<!-- jQuery Vector Maps -->
-	<script src="{{ asset('../assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
-	<script src="{{ asset('../assets/js/plugin/jsvectormap/world.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/jsvectormap/world.js') }}"></script>
 
 	<!-- Sweet Alert -->
-	<script src="{{ asset('../assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
 	<!-- Kaiadmin JS -->
-	<script src="{{ asset('../assets/js/kaiadmin.min.js') }}"></script>
+	<script src="{{ secure_asset('../assets/js/kaiadmin.min.js') }}"></script>
 
 	<!-- Kaiadmin DEMO methods, don't include it in your project! -->
-	<script src="{{ asset('../assets/js/setting-demo2.js') }}"></script>
-    <script src="{{ asset('../assets/js/demo.js') }}"></script>
-    <!-- <script src="{{ asset('../assets/js/setting-demo2.js') }}"></script> -->
+	<script src="{{ secure_asset('../assets/js/setting-demo2.js') }}"></script>
+    <script src="{{ secure_asset('../assets/js/demo.js') }}"></script>
+    <!-- <script src="{{ secure_asset('../assets/js/setting-demo2.js') }}"></script> -->
 
 
     <script>

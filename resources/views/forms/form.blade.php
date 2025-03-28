@@ -1,6 +1,41 @@
 @extends('layout.simple-hero')
 
 @section('main-simple-page')
+<!-- Font Awesome CDN (Corrected) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+<style>
+  .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 7px;
+            padding-right: 50px; /* Space for icon */
+            border: .5px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 15px;
+            color: gray;
+        }
+
+        .toggle-password:hover {
+            color: black;
+        }
+</style>
+
+
 
 <div class="container">
           <div class="page-inner">
@@ -58,16 +93,15 @@
                             >We'll never share your email with anyone
                             else.</small
                           >
-                        </div>
+                        </div> 
                         <div class="form-group">
-                          <label for="password">Password</label>
-                          <input
-                            type="password"
-                            class="form-control"
-                            name="password"
-                            placeholder="Enter Password"
-                          />
-                        </div>
+                            <label for="password">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="Enter Password">
+                                <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+                            </div>
+                        </div>  
+
                         <div class="form-group">
                           <label for="disableinput">Disable Input</label>
                           <input
@@ -759,4 +793,23 @@
           </form>
 </div>
 
+<script>
+        const passwordField = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        console.log(passwordField,togglePassword);
+
+        togglePassword.addEventListener("click", function (e) {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");  
+            } else {
+                passwordField.type = "password";
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");  
+            }
+        });
+</script>
+
 @endsection
+

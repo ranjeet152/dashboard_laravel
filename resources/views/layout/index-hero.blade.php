@@ -24,9 +24,9 @@
 
     <!-- Theme Stylesheet -->
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
 
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="{{ secure_asset('css/responsive.css') }}">
 
 </head>
 
@@ -285,7 +285,7 @@
 
 <!-- Script -->
 
-<script src="js/script.js"></script>
+<script src="{{ secure_asset('js/script.js') }}"></script>
 
 </body>
 

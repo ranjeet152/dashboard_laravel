@@ -357,10 +357,9 @@ ol.carousel-indicators li.active {
 .product-hover ul li a:hover {
     color: #40bea7;
     background: #fff;
-}
-.blog {
+} 
     
-}
+
 .blog-title {
     background: #40bea7;
     height: 45px;
@@ -386,9 +385,7 @@ ol.carousel-indicators li.active {
 .blog-title a:hover {
     color: #666;
 }
-.single-post {
-    
-}
+ 
 .post-thumbnail {
     position: relative;
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+  
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;  
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Password;
+
+
 class AuthController extends Controller
 {
     // Register
-
     public function registration(Request $request) {
         if ($request->isMethod("post")) {
             $request->validate([
@@ -64,30 +66,59 @@ class AuthController extends Controller
 
     return view("auth.registration");
     }
+
+
     
 
     // Login
     public function login(Request $request) {
+
         if (Auth::check()) {
             return redirect()->route("dashboard");  
         }
+
     
         if ($request->isMethod("post")) {
+
             $request->validate([
-                "email" => "required|email",
+                "email" => "required",
                 "password" => "required",
-            ]); 
-            
-            if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
-                return redirect()->route("dashboard")->with('success', 'Login successful!');
+            ], [
+                "email.required" => "Email or Username is required.",
+                "password.required" => "Password is required."
+            ]);
+            $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? "email" : "username";
+
+            $user = User::where('email', $request->email)
+            ->orWhere('username',  $request->email)
+            ->get()->first();
+           
+          
+            if (!$user) {
+                return back()->with("error", "User not found.");
+            }
+    
+            // Check Password Hash
+            if (!Hash::check($request->password, $user->password)) {
+
+                return back()->with("error", "Incorrect password.");
+            }
+          
+    
+    
+            // Attempt Login
+            if (Auth::attempt([$fieldType => $request->email, "password" => $request->password])) {
+                return redirect()->route("dashboard")->with("success", "Login successful!");
             } else {
-                return redirect()->route("login")->with("error", "Invalid login details");
+                return back()->with("error", "Login failed. Please try again.");
             }
         }
+        
+
     
         return view("auth.login");
     }
-    
+
     // Dashboard
     public function dashboard() {
         if (!Auth::check()) {
@@ -244,12 +275,10 @@ public function update(Request $request)
 
 
     // Sidebar_layout
-
-    public function sidebar_styles() {
-        $user = Auth::user();
-        return view("sidebar_layouts.sidebar_styles", compact('user'));
+    public function sidebar() {
+        $user = Auth::user();  
+        return view("sidebar.sidebar", compact('user'));  
     }
-
 
     // tables
     public function tables() {
@@ -339,5 +368,14 @@ public function update(Request $request)
 
     
         return redirect()->route('dashboard')->with('success', 'Form Successfully Submitted!');
+    }
+
+    // conter dashboard
+
+    public function index()
+    {
+        $totalUsers = User::count();  // Users की Total संख्या निकाले
+        
+        return view('dashboard', compact('totalUsers')); // View में भेजें
     }
 }   

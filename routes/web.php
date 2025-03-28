@@ -19,7 +19,12 @@ Route::match(["get", "post"], "login", [AuthController::class, "login"])
     ->name("login");
  
 // Dashboard (Only accessible after login)
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth'); 
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
+Route::get('/get-user-count', function () {
+    return response()->json(['count' => \App\Models\User::count()]);
+});
+
 
  // Components Routes
  Route::prefix('components')->group(function () {
@@ -47,28 +52,24 @@ Route::prefix('Quick_Actions')->group(function () {
 // profile
 Route::prefix('profile')->group(function () {
     Route::get('/view_profile', [AuthController::class, 'view_profile'])->name('profile.view_profile'); 
-}); 
-// ============== 
+});  
 
   // Profile Routes
   Route::controller(AuthController::class)->group(function () {
     Route::get('/profile', 'profile')->name('profile.view');
     Route::get('/profile/edit', 'edit')->name('profile.edit');
     Route::post('/profile/update', 'update')->name('profile.update');
-});
-
-// =============
-
-
+}); 
 Route::post('/profile/update-image', [AuthController::class, 'updateImage'])->name('profile.updateImage');
 
 // form..
 Route::get('/forms/form', [AuthController::class, 'form'])->name('forms.form')->middleware('auth'); 
 
 // Sidebar styles ..
-Route::prefix('sidebar_layouts')->group(function () {
-    Route::get('/sidebar_layouts/sidebar_styles', [AuthController::class, 'sidebar_styles'])->name('sidebar_layouts.sidebar_styles');  
+Route::prefix('sidebar')->group(function () {
+    Route::get('/sidebar', [AuthController::class, 'sidebar'])->name('sidebar.sidebar'); 
 }); 
+
 
 // tables..
 Route::prefix('tables')->group(function () {
